@@ -3,6 +3,9 @@ import numpy as np
 import pyaudio
 import wave
 
+TARGET_FREQUENCY = 1300
+TARGET_RANGE = 30
+
 RECORD_SECONDS = 50
 FORMAT = pyaudio.paInt16
 NUM_CHANNELS = 1
@@ -36,7 +39,7 @@ for i in range(0, (RATE/CHUNK_SIZE) * RECORD_SECONDS):
 		sample_freq = (which+x1)*RATE/CHUNK_SIZE
 	
 	#print "The freq is %f Hz." % (sample_freq)
-	if (sample_freq > 1100 and sample_freq < 1300):
+	if (sample_freq > TARGET_FREQUENCY-TARGET_RANGE and sample_freq < TARGET_FREQUENCY+TARGET_RANGE):
 		print "Permitted"
 
 # Close Input Stream
