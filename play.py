@@ -12,7 +12,7 @@ def sine(frequency, length, rate):
 	return numpy.sin(numpy.arange(length) * factor)
 
 
-def play_tone(stream, frequency=440, length=1, rate=RATE):
+def play_tone(stream, frequency=440, length=DEFAULT_LENGTH, rate=RATE):
 	chunks = []
 	chunks.append(sine(frequency, length, rate))
 
