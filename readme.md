@@ -2,7 +2,7 @@
 
 ## Synopsis
 
-Audio tools build with [PyAudio](https://people.csail.mit.edu/hubert/pyaudio/) for playing and validating tones and sounds.  
+Audio tools build with [PyAudio](https://people.csail.mit.edu/hubert/pyaudio/) for playing sounds.  
 
 ## Required Dependencies
 - [ ] Python: `brew install python`
@@ -13,10 +13,6 @@ Audio tools build with [PyAudio](https://people.csail.mit.edu/hubert/pyaudio/) f
 
 ## Features
 - [X] Play Tone Array (Frequency and Length)
-- [ ] Validate Tones
-	- [X] Validate single tone
-	- [ ] Validate series of tones
-	- [ ] Validate against .wav file
 
 ## Contributors
 
