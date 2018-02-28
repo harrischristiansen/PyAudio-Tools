@@ -16,4 +16,4 @@ Audio tools build with [PyAudio](https://people.csail.mit.edu/hubert/pyaudio/) f
 
 ## Contributors
 
-@harrischristiansen [HarrisChristiansen.com](http://www.harrischristiansen.com) (harris@harrischristainsen.com)  
+@harrischristiansen [HarrisChristiansen.com](http://www.harrischristiansen.com) (code@harrischristainsen.com)  
