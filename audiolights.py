@@ -3,7 +3,7 @@
 # Available on GitHub: https://github.com/harrischristiansen/PyAudio-Tools
 
 import logging
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 # -------------------- Lights --------------------
 
@@ -50,8 +50,8 @@ animations = [
 # -------------------- Audio --------------------
 import audiotk
 
-LOW_FREQ = 3500
-HIGH_FREQ = 7000
+LOW_FREQ = 500
+HIGH_FREQ = 1200
 
 RUN_SECONDS = 250
 
@@ -69,13 +69,13 @@ class AudioLights(object):
 		self._frames.append(data)
 
 		sample_freq = audiotk.freq_from_data(data)
-		#logging.debug("The freq is %f Hz." % (sample_freq))
+		logging.debug("The freq is %f Hz." % (sample_freq))
 
 		if sample_freq > LOW_FREQ:
 			self.advanceAnimation(sample_freq)
 
 	def advanceAnimation(self, freq):
-		logging.debug("Animation Advanced %f" % freq)
+		logging.info("Animation Advanced %f" % freq)
 		anim_num = self._animationStep % len(animations)
 		if freq > HIGH_FREQ:
 			animations[anim_num][1].run()
