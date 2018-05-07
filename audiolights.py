@@ -24,33 +24,38 @@ PINK	= huecontrols.hexToXY("#800080")
 YELLOW	= huecontrols.hexToXY("#ffb400")
 PURPLE	= huecontrols.hexToXY("#bb00ff")
 CYAN	= huecontrols.hexToXY("#FFFFFF")
-BROWN	= huecontrols.hexToXY("#FFFFFF")
+BROWN	= huecontrols.hexToXY("#aa6000")
 
 globalLight	= [Light(huecontrols, 0, "All Lights", 0, 0)]
-light1		= Light(huecontrols, 3, "Window", 0.5, 0.9)
-light2		= Light(huecontrols, 5, "Couch", 0.5, 0.8)
+light1		= Light(huecontrols, 3, "Bulb", 0.5, 0.9)
+light2		= Light(huecontrols, 5, "Strip", 0.5, 0.8)
 bothlights = [light1, light2]
 
-fadeToWhiteH	= FadeToColorAnimation(bothlights, [WHITE], brightness=255, tsTime=1, sTime=0)
-fadeToWhiteL	= FadeToColorAnimation(bothlights, [WHITE], brightness=50, tsTime=40, sTime=0)
-fadeToRedH		= FadeToColorAnimation(bothlights, [RED], brightness=255, tsTime=1, sTime=0)
-fadeToRedL		= FadeToColorAnimation(bothlights, [RED], brightness=50, tsTime=40, sTime=0)
-fadeToGreenH	= FadeToColorAnimation(bothlights, [GREEN], brightness=255, tsTime=1, sTime=0)
-fadeToGreenL	= FadeToColorAnimation(bothlights, [GREEN], brightness=50, tsTime=40, sTime=0)
-fadeToBlueH		= FadeToColorAnimation(bothlights, [BLUE], brightness=255, tsTime=1, sTime=0)
-fadeToBlueL		= FadeToColorAnimation(bothlights, [BLUE], brightness=50, tsTime=40, sTime=0)
+LOW_TS = 30
+HIGH_BRI = 255
+LOW_BRI = 50
+
+step1H	= FadeToColorAnimation(bothlights, [BLUE], brightness=HIGH_BRI, tsTime=1, sTime=0)
+step2H	= FadeToColorAnimation(bothlights, [PURPLE], brightness=HIGH_BRI, tsTime=1, sTime=0)
+step3H	= FadeToColorAnimation(bothlights, [ORANGE], brightness=HIGH_BRI, tsTime=1, sTime=0)
+step4H	= FadeToColorAnimation(bothlights, [PINK], brightness=HIGH_BRI, tsTime=1, sTime=0)
+step1L	= FadeToColorAnimation(bothlights, [YELLOW], brightness=LOW_BRI, tsTime=LOW_TS, sTime=0)
+step2L	= FadeToColorAnimation(bothlights, [RED], brightness=LOW_BRI, tsTime=LOW_TS, sTime=0)
+step3L	= FadeToColorAnimation(bothlights, [GREEN], brightness=LOW_BRI, tsTime=LOW_TS, sTime=0)
+step4L	= FadeToColorAnimation(bothlights, [BROWN], brightness=LOW_BRI, tsTime=LOW_TS, sTime=0)
 
 animations = [
-	(fadeToWhiteL, fadeToWhiteH),
-	(fadeToRedL, fadeToRedH),
-	(fadeToGreenL, fadeToGreenH),
-	(fadeToBlueL,fadeToBlueH)
+	(step1L, step1H),
+	(step2L, step2H),
+	(step3L, step3H),
+	(step4L, step4H)
 ]
 
 # -------------------- Audio --------------------
 import audiotk
+import threading
 
-LOW_FREQ = 500
+LOW_FREQ = 400
 HIGH_FREQ = 1200
 
 RUN_SECONDS = 250
@@ -69,10 +74,10 @@ class AudioLights(object):
 		self._frames.append(data)
 
 		sample_freq = audiotk.freq_from_data(data)
-		logging.debug("The freq is %f Hz." % (sample_freq))
+		#logging.debug("The freq is %f Hz." % (sample_freq))
 
 		if sample_freq > LOW_FREQ:
-			self.advanceAnimation(sample_freq)
+			self._spawn(self.advanceAnimation, sample_freq)
 
 	def advanceAnimation(self, freq):
 		logging.info("Animation Advanced %f" % freq)
@@ -82,6 +87,11 @@ class AudioLights(object):
 		else:
 			animations[anim_num][0].run()
 		self._animationStep += 1
+
+	def _spawn(self, f, *args):
+		t = threading.Thread(target=f, args=args)
+		t.daemon = True
+		t.start()
 
 ########################### Main ###########################
 if __name__ == '__main__':
