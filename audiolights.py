@@ -28,16 +28,17 @@ BROWN	= huecontrols.hexToXY("#FFFFFF")
 
 globalLight	= [Light(huecontrols, 0, "All Lights", 0, 0)]
 light1		= Light(huecontrols, 3, "Window", 0.5, 0.9)
-light2		= [Light(huecontrols, 5, "Couch", 0.5, 0.8)]
+light2		= Light(huecontrols, 5, "Couch", 0.5, 0.8)
+bothlights = [light1, light2]
 
-fadeToWhiteH = FadeToColorAnimation(light2, [WHITE], brightness=255, tsTime=1, sTime=0)
-fadeToWhiteL = FadeToColorAnimation(light2, [WHITE], brightness=50, tsTime=40, sTime=0)
-fadeToRedH = FadeToColorAnimation(light2, [RED], brightness=255, tsTime=1, sTime=0)
-fadeToRedL = FadeToColorAnimation(light2, [RED], brightness=50, tsTime=40, sTime=0)
-fadeToGreenH = FadeToColorAnimation(light2, [GREEN], brightness=255, tsTime=1, sTime=0)
-fadeToGreenL = FadeToColorAnimation(light2, [GREEN], brightness=50, tsTime=40, sTime=0)
-fadeToBlueH = FadeToColorAnimation(light2, [BLUE], brightness=255, tsTime=1, sTime=0)
-fadeToBlueL = FadeToColorAnimation(light2, [BLUE], brightness=50, tsTime=40, sTime=0)
+fadeToWhiteH	= FadeToColorAnimation(bothlights, [WHITE], brightness=255, tsTime=1, sTime=0)
+fadeToWhiteL	= FadeToColorAnimation(bothlights, [WHITE], brightness=50, tsTime=40, sTime=0)
+fadeToRedH		= FadeToColorAnimation(bothlights, [RED], brightness=255, tsTime=1, sTime=0)
+fadeToRedL		= FadeToColorAnimation(bothlights, [RED], brightness=50, tsTime=40, sTime=0)
+fadeToGreenH	= FadeToColorAnimation(bothlights, [GREEN], brightness=255, tsTime=1, sTime=0)
+fadeToGreenL	= FadeToColorAnimation(bothlights, [GREEN], brightness=50, tsTime=40, sTime=0)
+fadeToBlueH		= FadeToColorAnimation(bothlights, [BLUE], brightness=255, tsTime=1, sTime=0)
+fadeToBlueL		= FadeToColorAnimation(bothlights, [BLUE], brightness=50, tsTime=40, sTime=0)
 
 animations = [
 	(fadeToWhiteL, fadeToWhiteH),
@@ -49,8 +50,8 @@ animations = [
 # -------------------- Audio --------------------
 import audiotk
 
-LOW_FREQ = 4000
-HIGH_FREQ = 8000
+LOW_FREQ = 3500
+HIGH_FREQ = 7000
 
 RUN_SECONDS = 250
 
