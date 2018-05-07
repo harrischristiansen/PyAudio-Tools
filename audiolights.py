@@ -45,7 +45,6 @@ animations = [
 	(fadeToGreenL, fadeToGreenH),
 	(fadeToBlueL,fadeToBlueH)
 ]
-animationsH = [fadeToWhiteH, fadeToRedH, fadeToGreenH, fadeToBlueH]
 
 # -------------------- Audio --------------------
 import audiotk
