@@ -1,3 +1,6 @@
+# @ Harris Christiansen (code@harrischristiansen.com)
+# Available on GitHub: https://github.com/harrischristiansen/PyAudio-Tools
+
 import math
 import numpy
 import pyaudio
