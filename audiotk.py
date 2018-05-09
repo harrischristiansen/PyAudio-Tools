@@ -10,7 +10,7 @@ import wave
 FORMAT = pyaudio.paInt16
 NUM_CHANNELS = 1
 RATE = 44100
-CHUNK_SIZE = 4096
+CHUNK_SIZE = 1024
 DEFAULT_LENGTH = 0.05
 
 p = pyaudio.PyAudio()

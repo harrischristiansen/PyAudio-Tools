@@ -59,7 +59,7 @@ import audiotk
 LOW_FREQ = 1800
 HIGH_FREQ = 3500
 
-RUN_SECONDS = 250
+RUN_SECONDS = 1000
 
 class AudioLights(object):
 	def __init__(self):
