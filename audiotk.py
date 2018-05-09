@@ -35,7 +35,7 @@ def get_audio_with_callback(num_seconds, callback):
 	stream.start_stream()
 
 	# Wait for num_seconds
-	time.sleep(int(RATE/CHUNK_SIZE) * num_seconds)
+	time.sleep(num_seconds)
 
 	# Close Input Stream
 	stream.stop_stream()

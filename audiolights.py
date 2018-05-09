@@ -34,8 +34,8 @@ light2		= Light(huecontrols, 5, "Strip", 0.5, 0.8)
 bothlights = [light1, light2]
 
 LOW_TS = 30
-HIGH_BRI = 230
-LOW_BRI = 70
+HIGH_BRI = 255
+LOW_BRI = 120
 
 step1H	= FadeToColorAnimation(bothlights, [BLUE], brightness=HIGH_BRI, tsTime=1, sTime=0)
 step2H	= FadeToColorAnimation(bothlights, [PURPLE], brightness=HIGH_BRI, tsTime=1, sTime=0)
@@ -96,3 +96,4 @@ if __name__ == '__main__':
 	audioLights = AudioLights()
 	frames = audioLights.animateAudio()
 	#audiotk.save_to_file("recording.wav", frames)
+	huecontrols.stopLightQueue()
