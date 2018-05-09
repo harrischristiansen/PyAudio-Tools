@@ -55,7 +55,6 @@ animations = [
 
 # -------------------- Audio --------------------
 import audiotk
-import threading
 
 LOW_FREQ = 1800
 HIGH_FREQ = 3500
@@ -68,9 +67,7 @@ class AudioLights(object):
 		self._animationStep = 0
 
 	def animateAudio(self):
-		# audiotk.get_audio_with_callback(RUN_SECONDS, self.checkData)
-		for data in audiotk.get_audio(RUN_SECONDS):
-			self.checkData(data)
+		audiotk.get_audio_with_callback(RUN_SECONDS, self.checkData)
 		return self._frames
 
 	def checkData(self, data, frame_count=None, time_info=None, status=None):
@@ -80,7 +77,9 @@ class AudioLights(object):
 		#logging.debug("The freq is %f Hz." % (sample_freq))
 
 		if sample_freq > LOW_FREQ:
-			self._spawn(self.advanceAnimation, sample_freq)
+			self.advanceAnimation(sample_freq)
+
+		return (data, audiotk.pyaudio.paContinue)
 
 	def advanceAnimation(self, freq):
 		anim_num = self._animationStep % len(animations)
@@ -91,11 +90,6 @@ class AudioLights(object):
 			logging.info("Animation Advanced - Low: %f" % freq)
 			animations[anim_num][0].run()
 		self._animationStep += 1
-
-	def _spawn(self, f, *args):
-		t = threading.Thread(target=f, args=args)
-		t.daemon = True
-		t.start()
 
 ########################### Main ###########################
 if __name__ == '__main__':
