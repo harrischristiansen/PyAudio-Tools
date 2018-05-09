@@ -33,10 +33,10 @@ light1		= Light(huecontrols, 3, "Bulb", 0.5, 0.9) # 17=bathroom, 28=counter
 light2		= Light(huecontrols, 5, "Strip", 0.5, 0.8)
 bothlights = [light1, light2]
 
-step1	= FadeToColorAnimation(bothlights, [BLUE], brightness=50, tsTime=50, sTime=0)
-step2	= FadeToColorAnimation(bothlights, [PURPLE], brightness=70, tsTime=40, sTime=0)
-step3	= FadeToColorAnimation(bothlights, [PINK], brightness=100, tsTime=30, sTime=0)
-step4	= FadeToColorAnimation(bothlights, [RED], brightness=130, tsTime=20, sTime=0)
+step1	= FadeToColorAnimation(bothlights, [BLUE], brightness=50, tsTime=30, sTime=0)
+step2	= FadeToColorAnimation(bothlights, [PURPLE], brightness=70, tsTime=25, sTime=0)
+step3	= FadeToColorAnimation(bothlights, [PINK], brightness=100, tsTime=20, sTime=0)
+step4	= FadeToColorAnimation(bothlights, [RED], brightness=130, tsTime=15, sTime=0)
 step5	= FadeToColorAnimation(bothlights, [BROWN], brightness=160, tsTime=10, sTime=0)
 step6	= FadeToColorAnimation(bothlights, [ORANGE], brightness=190, tsTime=5, sTime=0)
 step7	= FadeToColorAnimation(bothlights, [YELLOW], brightness=220, tsTime=2, sTime=0)
