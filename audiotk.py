@@ -4,6 +4,7 @@
 import math
 import numpy as np
 import pyaudio
+import time
 import wave
 
 FORMAT = pyaudio.paInt16
@@ -26,6 +27,18 @@ def get_audio(num_seconds):
 		yield data
 
 	# Close Input Stream
+	stream.close()
+
+def get_audio_with_callback(num_seconds, callback):
+	# Create Input Stream
+	stream = p.open(format=FORMAT, channels=NUM_CHANNELS, rate=RATE, input=1, frames_per_buffer=CHUNK_SIZE, stream_callback=callback)
+	stream.start_stream()
+
+	# Wait for num_seconds
+	time.sleep(int(RATE/CHUNK_SIZE) * num_seconds)
+
+	# Close Input Stream
+	stream.stop_stream()
 	stream.close()
 
 def play_tone(stream, frequency=440, length=DEFAULT_LENGTH, rate=RATE):

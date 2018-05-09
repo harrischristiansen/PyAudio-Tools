@@ -10,7 +10,9 @@ logging.basicConfig(level=logging.INFO)
 from HueControls import HueControls
 from LightControl import *
 
-HUE_BRIDGE_IP = '192.168.1.125'
+# HUE_BRIDGE_IP = '10.3.0.177' # Fuse
+# HUE_BRIDGE_API_KEY = 'd5orxbetHKF46FCV1wBmnFTVNSkGQWMSjwNOHu2i'
+HUE_BRIDGE_IP = '192.168.1.125' # Namans
 HUE_BRIDGE_API_KEY = 'QeU9qwKYDc5Z1OqzhPMbrutdRwSKj9wDFgLUAii4'
 huecontrols = HueControls(HUE_BRIDGE_IP, HUE_BRIDGE_API_KEY)
 huecontrols.startLightQueue()
@@ -27,13 +29,13 @@ CYAN	= huecontrols.hexToXY("#FFFFFF")
 BROWN	= huecontrols.hexToXY("#aa6000")
 
 globalLight	= [Light(huecontrols, 0, "All Lights", 0, 0)]
-light1		= Light(huecontrols, 3, "Bulb", 0.5, 0.9)
+light1		= Light(huecontrols, 3, "Bulb", 0.5, 0.9) # 17=bathroom, 28=counter
 light2		= Light(huecontrols, 5, "Strip", 0.5, 0.8)
 bothlights = [light1, light2]
 
 LOW_TS = 30
-HIGH_BRI = 255
-LOW_BRI = 50
+HIGH_BRI = 230
+LOW_BRI = 70
 
 step1H	= FadeToColorAnimation(bothlights, [BLUE], brightness=HIGH_BRI, tsTime=1, sTime=0)
 step2H	= FadeToColorAnimation(bothlights, [PURPLE], brightness=HIGH_BRI, tsTime=1, sTime=0)
@@ -55,8 +57,8 @@ animations = [
 import audiotk
 import threading
 
-LOW_FREQ = 400
-HIGH_FREQ = 1200
+LOW_FREQ = 1800
+HIGH_FREQ = 3500
 
 RUN_SECONDS = 250
 
@@ -66,11 +68,12 @@ class AudioLights(object):
 		self._animationStep = 0
 
 	def animateAudio(self):
+		# audiotk.get_audio_with_callback(RUN_SECONDS, self.checkData)
 		for data in audiotk.get_audio(RUN_SECONDS):
 			self.checkData(data)
 		return self._frames
 
-	def checkData(self, data):
+	def checkData(self, data, frame_count=None, time_info=None, status=None):
 		self._frames.append(data)
 
 		sample_freq = audiotk.freq_from_data(data)
@@ -80,11 +83,12 @@ class AudioLights(object):
 			self._spawn(self.advanceAnimation, sample_freq)
 
 	def advanceAnimation(self, freq):
-		logging.info("Animation Advanced %f" % freq)
 		anim_num = self._animationStep % len(animations)
 		if freq > HIGH_FREQ:
+			logging.info("Animation Advanced - High: %f" % freq)
 			animations[anim_num][1].run()
 		else:
+			logging.info("Animation Advanced - Low: %f" % freq)
 			animations[anim_num][0].run()
 		self._animationStep += 1
 
