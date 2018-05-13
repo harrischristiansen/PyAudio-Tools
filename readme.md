@@ -4,16 +4,19 @@
 
 Audio tools build with [PyAudio](https://people.csail.mit.edu/hubert/pyaudio/) for playing sounds.  
 
-## Required Dependencies
-- [ ] Python: `brew install python`
-	- [ ] Pip (Optional, included with Python): `brew install pip`
-- [ ] Audio: `brew install portaudio`
-- [ ] Pyaudio: `pip install pyaudio`
-- [ ] Numpy: `pip install numpy`
+## Setup
+
+- [ ] Python 3 (https://www.python.org/downloads/): `brew install python`
+	- [ ] Pip (Optional, included with Python): `brew install pip3`
+- [ ] Port Audio: `brew install portaudio`
+- [ ] PyAudio: `pip3 install pyaudio`
+- [ ] Numpy: `pip3 install numpy`
+- [ ] Install Local Packages:
+	- [ ] LuminaryAudio: `pip3 install -e luminaryaudio`
 
 ## Features
 - [X] Play Tone Array (Frequency and Length)
 
 ## Contributors
 
-@harrischristiansen [HarrisChristiansen.com](http://www.harrischristiansen.com) (code@harrischristainsen.com)  
+[@harrischristiansen](http://github.com/harrischristiansen) [HarrisChristiansen.com](http://www.harrischristiansen.com) (audiotools@pinghc.com)  

@@ -6,14 +6,14 @@ import logging
 logging.basicConfig(level=logging.INFO)
 
 # -------------------- Lights --------------------
-
+'''
 from HueControls import HueControls
 from LightControl import *
 
-# HUE_BRIDGE_IP = '10.3.0.177' # Fuse
-# HUE_BRIDGE_API_KEY = 'd5orxbetHKF46FCV1wBmnFTVNSkGQWMSjwNOHu2i'
-HUE_BRIDGE_IP = '192.168.1.125' # Namans
-HUE_BRIDGE_API_KEY = 'QeU9qwKYDc5Z1OqzhPMbrutdRwSKj9wDFgLUAii4'
+HUE_BRIDGE_IP = '10.3.0.177' # Fuse
+HUE_BRIDGE_API_KEY = 'd5orxbetHKF46FCV1wBmnFTVNSkGQWMSjwNOHu2i'
+# HUE_BRIDGE_IP = '192.168.1.125' # Namans
+# HUE_BRIDGE_API_KEY = 'QeU9qwKYDc5Z1OqzhPMbrutdRwSKj9wDFgLUAii4'
 huecontrols = HueControls(HUE_BRIDGE_IP, HUE_BRIDGE_API_KEY)
 huecontrols.startLightQueue()
 
@@ -29,8 +29,8 @@ CYAN	= huecontrols.hexToXY("#FFFFFF")
 BROWN	= huecontrols.hexToXY("#aa6000")
 
 globalLight	= [Light(huecontrols, 0, "All Lights", 0, 0)]
-light1		= Light(huecontrols, 3, "Bulb", 0.5, 0.9) # 17=bathroom, 28=counter
-light2		= Light(huecontrols, 5, "Strip", 0.5, 0.8)
+light1		= Light(huecontrols, 26, "Bulb", 0.5, 0.9) # 17=bathroom, 28=counter
+light2		= Light(huecontrols, 4, "Strip", 0.5, 0.8)
 bothlights = [light1, light2]
 
 LOW_TS = 30
@@ -52,14 +52,14 @@ animations = [
 	(step3L, step3H),
 	(step4L, step4H)
 ]
-
+'''
 # -------------------- Audio --------------------
-import audiotk
+from LuminaryAudio import audiotk
 
 LOW_FREQ = 1800
 HIGH_FREQ = 3500
 
-RUN_SECONDS = 1000
+RUN_SECONDS = 3000
 
 class AudioLights(object):
 	def __init__(self):
@@ -74,10 +74,10 @@ class AudioLights(object):
 		self._frames.append(data)
 
 		sample_freq = audiotk.freq_from_data(data)
-		#logging.debug("The freq is %f Hz." % (sample_freq))
+		logging.info("The freq is %f Hz." % (sample_freq))
 
-		if sample_freq > LOW_FREQ:
-			self.advanceAnimation(sample_freq)
+		'''if sample_freq > LOW_FREQ:
+			self.advanceAnimation(sample_freq)'''
 
 		return (data, audiotk.pyaudio.paContinue)
 

@@ -10,10 +10,10 @@ logging.basicConfig(level=logging.INFO)
 from HueControls import HueControls
 from LightControl import *
 
-# HUE_BRIDGE_IP = '10.3.0.177' # Fuse
-# HUE_BRIDGE_API_KEY = 'd5orxbetHKF46FCV1wBmnFTVNSkGQWMSjwNOHu2i'
-HUE_BRIDGE_IP = '192.168.1.125' # Namans
-HUE_BRIDGE_API_KEY = 'QeU9qwKYDc5Z1OqzhPMbrutdRwSKj9wDFgLUAii4'
+HUE_BRIDGE_IP = '10.3.0.177' # Fuse
+HUE_BRIDGE_API_KEY = 'd5orxbetHKF46FCV1wBmnFTVNSkGQWMSjwNOHu2i'
+# HUE_BRIDGE_IP = '192.168.1.125' # Namans
+# HUE_BRIDGE_API_KEY = 'QeU9qwKYDc5Z1OqzhPMbrutdRwSKj9wDFgLUAii4'
 huecontrols = HueControls(HUE_BRIDGE_IP, HUE_BRIDGE_API_KEY)
 huecontrols.startLightQueue()
 
@@ -29,8 +29,11 @@ CYAN	= huecontrols.hexToXY("#FFFFFF")
 BROWN	= huecontrols.hexToXY("#aa6000")
 
 globalLight	= [Light(huecontrols, 0, "All Lights", 0, 0)]
-light1		= Light(huecontrols, 3, "Bulb", 0.5, 0.9) # 17=bathroom, 28=counter
-light2		= Light(huecontrols, 5, "Strip", 0.5, 0.8)
+light1		= Light(huecontrols, 26, "Bulb", 0.5, 0.9)
+light2		= Light(huecontrols, 4, "Bulb", 0.5, 0.8)
+light3		= Light(huecontrols, 19, "Bulb", 0.5, 0.8)
+light4		= Light(huecontrols, 20, "Bulb", 0.5, 0.8)
+light5		= Light(huecontrols, 21, "Bulb", 0.5, 0.8)
 bothlights = [light1, light2]
 
 step1	= FadeToColorAnimation(bothlights, [BLUE], brightness=50, tsTime=30, sTime=0)
@@ -48,7 +51,7 @@ animations = [step1, step2, step3, step4, step5, step6, step7, step8]
 import audiotk
 
 RUN_SECONDS = 1000
-MAX_FREQ = 8000
+MAX_FREQ = 7000
 LEN_ANIMATIONS = len(animations)
 FREQ_PER_STEP = MAX_FREQ/LEN_ANIMATIONS
 
